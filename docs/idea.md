@@ -2,7 +2,7 @@
 
 ## Descripción general
 
-GameNight es una aplicación web que ayuda a grupos de amigos a organizar sus sesiones de juego.
+Gamecrew es una aplicación web que ayuda a grupos de amigos a organizar sus sesiones de juego.
 El problema que resuelve es simple: cuando varios amigos de un grupo quieren juagar, siempre surge la misma pregunta ¿a qué jugamos esta noche? 
 y se pierde tiempo decidiendo entre todos. Gamecrew centraliza las propuestas, las votaciones y el historial de sesiones en un solo lugar.
 
