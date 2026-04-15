@@ -73,8 +73,3 @@ Grupos de amigos (2-6 personas) que quedan regularmente para jugar videojuegos e
 4. El juego con más votos se marca como "elegido".
 5. Después de jugar, los participantes valoran la sesión.
 6. La sesión pasa al historial y las estadísticas se actualizan.
-
-## Repositorio
-
-> _(Enlace al repositorio de GitHub — se añadirá una vez creado)_
-
