@@ -7,13 +7,19 @@ interface NewSessionFormProps {
 }
 
 export default function NewSessionForm({ onSubmit }: NewSessionFormProps) {
+  const [sessionName, setSessionName] = useState('')
   const [date, setDate] = useState('')
   const [participantInput, setParticipantInput] = useState('')
   const [participants, setParticipants] = useState<string[]>([])
-  const [errors, setErrors] = useState<{ date?: string; participants?: string }>({})
+  const [errors, setErrors] = useState<{
+    sessionName?: string
+    date?: string
+    participants?: string
+  }>({})
 
   const validate = () => {
-    const newErrors: { date?: string; participants?: string } = {}
+    const newErrors: { sessionName?: string; date?: string; participants?: string } = {}
+    if (!sessionName.trim()) newErrors.sessionName = 'El nombre de la sesión es obligatorio'
     if (!date) newErrors.date = 'La fecha es obligatoria'
     if (participants.length < 2) newErrors.participants = 'Añade al menos 2 participantes'
     if (participants.length > 6) newErrors.participants = 'Máximo 6 participantes'
@@ -40,12 +46,24 @@ export default function NewSessionForm({ onSubmit }: NewSessionFormProps) {
       date,
       participants: participants.map((name, i) => ({ id: String(i), name })),
       rating: undefined,
-      chosenGame: undefined,
+      chosenGame: sessionName,
     })
   }
 
   return (
     <div className="bg-gray-800 rounded-xl p-6 flex flex-col gap-4">
+
+      <div>
+        <label className="text-gray-300 text-sm mb-1 block">Nombre de la sesión</label>
+        <input
+          type="text"
+          value={sessionName}
+          onChange={e => setSessionName(e.target.value)}
+          placeholder="Ej: Viernes de juegos"
+          className="w-full bg-gray-700 text-white rounded-lg px-3 py-2 border border-gray-600 focus:outline-none focus:border-purple-500"
+        />
+        {errors.sessionName && <p className="text-red-400 text-xs mt-1">{errors.sessionName}</p>}
+      </div>
 
       <div>
         <label className="text-gray-300 text-sm mb-1 block">Fecha de la sesión</label>
