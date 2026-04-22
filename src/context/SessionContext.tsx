@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import type { Session } from '../types'
+import * as api from '../api/client'
 
 interface SessionContextType {
   sessions: Session[]
@@ -20,9 +21,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch('/api/v1/sessions')
-      if (!res.ok) throw new Error('Error al cargar las sesiones')
-      const data = await res.json()
+      const data = await api.getSessions()
       setSessions(data)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error desconocido')
@@ -35,17 +34,13 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
     fetchSessions()
   }, [fetchSessions])
 
-  const addSession = useCallback(async (newSession: Omit<Session, 'id' | 'games' | 'isPlayed'>) => {
+  const addSession = useCallback(async (
+    newSession: Omit<Session, 'id' | 'games' | 'isPlayed'>
+  ) => {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch('/api/v1/sessions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newSession)
-      })
-      if (!res.ok) throw new Error('Error al crear la sesión')
-      const created = await res.json()
+      const created = await api.createSession(newSession)
       setSessions(prev => [...prev, created])
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error desconocido')
