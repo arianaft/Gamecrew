@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, nav a, .logo {
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+body {
+  background: #0a0a0f;
+}

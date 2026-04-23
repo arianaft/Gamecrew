@@ -7,16 +7,27 @@ interface ButtonProps {
 
 export default function Button({ label, onClick, variant = 'primary', disabled = false }: ButtonProps) {
   const styles = {
-    primary: 'bg-purple-600 hover:bg-purple-700 text-white',
-    secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-800',
-    danger: 'bg-red-500 hover:bg-red-600 text-white',
+    primary: 'text-white font-semibold tracking-wider',
+    secondary: 'text-gray-300 font-semibold tracking-wider',
+    danger: 'text-white font-semibold tracking-wider',
+  }
+
+  const backgrounds = {
+    primary: 'linear-gradient(135deg, #7c3aed, #a855f7)',
+    secondary: 'rgba(255,255,255,0.08)',
+    danger: 'linear-gradient(135deg, #dc2626, #ef4444)',
   }
 
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${styles[variant]}`}
+      className={`px-5 py-2 rounded-lg transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed ${styles[variant]}`}
+      style={{
+        background: disabled ? 'rgba(255,255,255,0.05)' : backgrounds[variant],
+        border: '1px solid rgba(139,92,246,0.4)',
+        boxShadow: variant === 'primary' && !disabled ? '0 0 15px rgba(168,85,247,0.3)' : 'none'
+      }}
     >
       {label}
     </button>

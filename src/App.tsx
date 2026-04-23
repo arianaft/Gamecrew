@@ -9,7 +9,7 @@ import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div style={{ background: '#0a0a0f', minHeight: '100vh' }}>
       <Navbar />
       <main className="max-w-4xl mx-auto px-4 py-8">
         <Routes>
