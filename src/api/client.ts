@@ -34,12 +34,13 @@ export async function createSession(
 export async function addGame(
   sessionId: string,
   name: string,
-  proposedBy: string
+  proposedBy: string,
+  image?: string
 ): Promise<GameProposal> {
   const res = await fetch(`${BASE_URL}/sessions/${sessionId}/games`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, proposedBy })
+    body: JSON.stringify({ name, proposedBy, image })
   })
   return handleResponse<GameProposal>(res)
 }

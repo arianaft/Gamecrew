@@ -8,6 +8,7 @@ export interface GameProposal {
   name: string
   proposedBy: string
   votes: string[]
+  image?: string
 }
 
 export interface Session {

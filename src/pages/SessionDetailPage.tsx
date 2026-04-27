@@ -32,10 +32,10 @@ export default function SessionDetailPage() {
     load()
   }, [id])
 
-  const handleAddGame = async (gameName: string, proposedBy: string) => {
+  const handleAddGame = async (gameName: string, proposedBy: string, image?: string) => {
     if (!session) return
     try {
-      await api.addGame(session.id, gameName, proposedBy)
+      await api.addGame(session.id, gameName, proposedBy, image)
       const updated = await api.getSessionById(session.id)
       setSession(updated)
     } catch {
@@ -103,12 +103,17 @@ export default function SessionDetailPage() {
                 className={`bg-gray-800 rounded-xl p-4 border ${winningGame?.id === game.id ? 'border-purple-500' : 'border-gray-700'}`}
               >
                 <div className="flex justify-between items-center">
-                  <div>
-                    <p className="text-white font-medium">{game.name}</p>
-                    <p className="text-gray-400 text-sm">Propuesto por {game.proposedBy}</p>
-                    <p className="text-purple-400 text-sm mt-1">
-                      {game.votes.length} {game.votes.length === 1 ? 'voto' : 'votos'}
-                    </p>
+                  <div className="flex items-center gap-3">
+                    {game.image && (
+                      <img src={game.image} alt={game.name} className="w-16 h-12 object-cover rounded-lg" />
+                    )}
+                    <div>
+                      <p className="text-white font-medium">{game.name}</p>
+                      <p className="text-gray-400 text-sm">Propuesto por {game.proposedBy}</p>
+                      <p className="text-purple-400 text-sm mt-1">
+                        {game.votes.length} {game.votes.length === 1 ? 'voto' : 'votos'}
+                      </p>
+                    </div>
                   </div>
                   <Button
                     label={votedGameId === game.id ? '✓ Votado' : 'Votar'}

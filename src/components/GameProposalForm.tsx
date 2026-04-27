@@ -4,32 +4,35 @@ import type { GameResult } from '../api/rawg'
 import Button from './Button'
 
 interface GameProposalFormProps {
-  onSubmit: (gameName: string, proposedBy: string) => void
+  onSubmit: (gameName: string, proposedBy: string, image?: string) => void
 }
 
 export default function GameProposalForm({ onSubmit }: GameProposalFormProps) {
   const [gameName, setGameName] = useState('')
   const [proposedBy, setProposedBy] = useState('')
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined)
   const [errors, setErrors] = useState<{ gameName?: string; proposedBy?: string }>({})
   const [suggestions, setSuggestions] = useState<GameResult[]>([])
   const [searching, setSearching] = useState(false)
 
-  useEffect(() => {
-    const timer = setTimeout(async () => {
-      if (gameName.length >= 2) {
-        setSearching(true)
-        const results = await searchGames(gameName)
-        setSuggestions(results)
-        setSearching(false)
-      } else {
-        setSuggestions([])
-      }
-    }, 500)
-    return () => clearTimeout(timer)
-  }, [gameName])
+useEffect(() => {
+  if (selectedImage) return
+  const timer = setTimeout(async () => {
+    if (gameName.length >= 2) {
+      setSearching(true)
+      const results = await searchGames(gameName)
+      setSuggestions(results)
+      setSearching(false)
+    } else {
+      setSuggestions([])
+    }
+  }, 500)
+  return () => clearTimeout(timer)
+}, [gameName, selectedImage])
 
   const handleSelectGame = (game: GameResult) => {
     setGameName(game.name)
+    setSelectedImage(game.image)
     setSuggestions([])
   }
 
@@ -43,9 +46,10 @@ export default function GameProposalForm({ onSubmit }: GameProposalFormProps) {
 
   const handleSubmit = () => {
     if (!validate()) return
-    onSubmit(gameName.trim(), proposedBy.trim())
+    onSubmit(gameName.trim(), proposedBy.trim(), selectedImage)
     setGameName('')
     setProposedBy('')
+    setSelectedImage(undefined)
     setSuggestions([])
     setErrors({})
   }
@@ -56,10 +60,13 @@ export default function GameProposalForm({ onSubmit }: GameProposalFormProps) {
 
       <div className="relative">
         <label className="text-gray-300 text-sm mb-1 block">Nombre del juego</label>
+        {selectedImage && (
+          <img src={selectedImage} alt={gameName} className="w-20 h-14 object-cover rounded-lg mb-2" />
+        )}
         <input
           type="text"
           value={gameName}
-          onChange={e => setGameName(e.target.value)}
+          onChange={e => { setGameName(e.target.value); setSelectedImage(undefined) }}
           placeholder="Busca un juego..."
           className="w-full text-white rounded-lg px-3 py-2 border border-gray-600 focus:outline-none focus:border-purple-500"
           style={{ background: 'rgba(255,255,255,0.05)' }}

@@ -47,11 +47,11 @@ Crea una sesión nueva.
 **Response 400:** `{ "error": "Datos incorrectos" }`
 
 ### POST /sessions/:id/games
-Propone un juego a una sesión.
+Propone un juego a una sesión. El campo `image` es opcional y se obtiene automáticamente desde GameBrain API al seleccionar un juego del autocompletado.
 
 **Body:**
 ```json
-{ "name": "Minecraft", "proposedBy": "Ariana" }
+{ "name": "Minecraft", "proposedBy": "Ariana", "image": "https://img.gamebrain.co/..." }
 ```
 **Response 201:** juego creado  
 **Response 404:** `{ "error": "Sesión no encontrada" }`
@@ -75,3 +75,31 @@ Valora una sesión del 1 al 5.
 ```
 **Response 200:** sesión actualizada  
 **Response 400:** `{ "error": "La valoración debe ser entre 1 y 5" }`
+
+### GET /sessions/games/search?q=:query
+Busca juegos usando GameBrain API como proxy seguro. La API key nunca se expone al frontend.
+
+**Ejemplo:** `GET /sessions/games/search?q=zelda`
+
+**Response 200:**
+```json
+[
+  {
+    "id": 1234,
+    "name": "The Legend of Zelda: Tears of the Kingdom",
+    "image": "https://img.gamebrain.co/games/zelda.jpg",
+    "genres": [{ "value": "action-adventure", "name": "Action-Adventure" }]
+  }
+]
+```
+**Response 400:** `{ "error": "Parámetro q es obligatorio" }`
+
+---
+
+## API Externa — GameBrain
+
+GameCrew integra [GameBrain API](https://gamebrain.co) para el autocompletado de juegos al proponer uno en una sesión.
+
+- Las búsquedas se realizan a través del servidor Express como proxy
+- La API key se almacena en `server/.env` y nunca se expone al cliente
+- Se muestran hasta 5 sugerencias con imagen y género al escribir en el campo de búsqueda
