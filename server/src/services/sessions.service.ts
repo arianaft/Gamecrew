@@ -20,14 +20,15 @@ export function createSession(data: Omit<Session, 'id' | 'games' | 'isPlayed'>):
   return newSession
 }
 
-export function addGameToSession(sessionId: string, name: string, proposedBy: string): GameProposal | null {
+export function addGameToSession(sessionId: string, name: string, proposedBy: string, image?: string): GameProposal | null {
   const session = sessions.find(s => s.id === sessionId)
   if (!session) return null
   const game: GameProposal = {
     id: String(Date.now()),
     name,
     proposedBy,
-    votes: []
+    votes: [],
+    image
   }
   session.games.push(game)
   return game

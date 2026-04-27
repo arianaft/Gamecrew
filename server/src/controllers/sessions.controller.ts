@@ -27,12 +27,12 @@ export function createSession(req: Request, res: Response): void {
 }
 
 export function addGame(req: Request, res: Response): void {
-  const { name, proposedBy } = req.body
+  const { name, proposedBy, image } = req.body
   if (!name || !proposedBy) {
     res.status(400).json({ error: 'Nombre del juego y participante son obligatorios' })
     return
   }
-  const game = service.addGameToSession(req.params.id as string, name, proposedBy)
+  const game = service.addGameToSession(req.params.id as string, name, proposedBy, image)
   if (!game) {
     res.status(404).json({ error: 'Sesión no encontrada' })
     return
