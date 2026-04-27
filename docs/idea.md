@@ -27,7 +27,7 @@ Grupos de amigos (2-6 personas) que quedan regularmente para jugar videojuegos e
 
 ## Funcionalidades opcionales
 
-- Buscar juegos usando la RAWG API para autocompletar el nombre y mostrar la portada del juego.
+- Buscar juegos usando la GameBrain para completar el nombre y mostrar la portada del juego.
 - Notificación visual (badge) cuando hay una sesión programada próximamente.
 - Filtrar el historial por participante o por juego.
 - Modo "ruleta": si hay empate, el sistema elige un ganador al azar.
@@ -51,7 +51,7 @@ Grupos de amigos (2-6 personas) que quedan regularmente para jugar videojuegos e
 | Estado global | Context API |
 | Backend | Node.js + Express |
 | Persistencia | JSON en servidor (sin base de datos) |
-| API externa | RAWG API (opcional, para portadas de juegos) |
+| API externa | GameBrain (opcional, para portadas de juegos) |
 | Gestión de tareas | Trello |
 
 ## Estructura de rutas prevista
