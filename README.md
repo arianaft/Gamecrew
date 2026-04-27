@@ -65,7 +65,7 @@ npm run dev
 
 ### Variables de entorno
 
-Crea un archivo `server/.env` con: GAMEBRAIN_API_KEY=tu_api_key
+Crea un archivo `server/.env` con: GAMEBRAIN_API_KEY=api_key
 
 ##  Funcionalidades
 
