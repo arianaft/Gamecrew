@@ -29,7 +29,9 @@ Organizador de sesiones de juego para grupos de amigos (2-6 personas). Permite c
 **API Externa**
 - [GameBrain API](https://gamebrain.co) — autocompletado de juegos con imágenes y géneros
 
-## 📁 Estructura del proyecto
+##  Estructura del proyecto
+
+```
 gamecrew/
 ├── src/               # Frontend React
 │   ├── api/           # Llamadas al backend
@@ -44,8 +46,9 @@ gamecrew/
 │       ├── services/      # Lógica de negocio
 │       └── config/        # Datos iniciales
 └── docs/              # Documentación
+```
 
-## 🚀 Instalación local
+##  Instalación local
 
 ### Frontend
 ```bash
@@ -64,7 +67,7 @@ npm run dev
 
 Crea un archivo `server/.env` con: GAMEBRAIN_API_KEY=tu_api_key
 
-## ✨ Funcionalidades
+##  Funcionalidades
 
 - Crear sesiones con fecha y participantes
 - Proponer juegos con búsqueda y autocompletado via GameBrain
