@@ -1,4 +1,4 @@
-# GameCrew 🎮
+# GameCrew 
 
 Organizador de sesiones de juego para grupos de amigos (2-6 personas). Permite crear sesiones, proponer juegos con autocompletado, votar entre los participantes y valorar la sesión al terminar.
 
@@ -8,13 +8,13 @@ Organizador de sesiones de juego para grupos de amigos (2-6 personas). Permite c
 - [Frontend en Vercel](#) *(próximamente)*
 - [Backend en Render](#) *(próximamente)*
 
-## 📄 Documentación
+##  Documentación
 
 - [Idea del proyecto](docs/idea.md)
 - [Metodologías ágiles](docs/agile.md)
 - [API REST](docs/api.md)
 
-## 🛠️ Tecnologías
+##  Tecnologías
 
 **Frontend**
 - React 18 + TypeScript
