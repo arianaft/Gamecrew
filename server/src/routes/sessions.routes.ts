@@ -3,6 +3,7 @@ import * as controller from '../controllers/sessions.controller'
 
 const router = Router()
 
+router.get('/games/search', controller.searchGames)
 router.get('/', controller.getAllSessions)
 router.get('/:id', controller.getSessionById)
 router.post('/', controller.createSession)

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import * as service from '../services/sessions.service'
+import * as gamebrain from '../services/gamebrain.service'
 
 export function getAllSessions(req: Request, res: Response): void {
   const data = service.getAllSessions()
@@ -65,4 +66,14 @@ export function rateSession(req: Request, res: Response): void {
     return
   }
   res.status(200).json(session)
+}
+
+export async function searchGames(req: Request, res: Response): Promise<void> {
+  const { q } = req.query
+  if (!q || typeof q !== 'string') {
+    res.status(400).json({ error: 'Parámetro q es obligatorio' })
+    return
+  }
+  const results = await gamebrain.searchGames(q)
+  res.status(200).json(results)
 }
