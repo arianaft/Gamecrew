@@ -2,11 +2,12 @@
 
 Organizador de sesiones de juego para grupos de amigos (2-6 personas). Permite crear sesiones, proponer juegos con autocompletado, votar entre los participantes y valorar la sesión al terminar.
 
-##  Enlaces
+## 🔗 Enlaces
 
 - [Tablero Trello](https://trello.com/invite/b/69df69ada047d0e756d98aeb/ATTI4d49a171bafb960ab93f0517baa3209a91FFB376/gamecrew)
 - [Frontend en Vercel](https://gamecrew.vercel.app)
 - [Backend en Render](https://gamecrew-api.onrender.com)
+
 
 ##  Documentación
 
@@ -65,7 +66,7 @@ npm run dev
 
 ### Variables de entorno
 
-Crea un archivo `server/.env` con: GAMEBRAIN_API_KEY=api_key
+Crea un archivo `server/.env` con: GAMEBRAIN_API_KEY=tu_api_key
 
 ##  Funcionalidades
 
