@@ -5,8 +5,8 @@ Organizador de sesiones de juego para grupos de amigos (2-6 personas). Permite c
 ##  Enlaces
 
 - [Tablero Trello](https://trello.com/invite/b/69df69ada047d0e756d98aeb/ATTI4d49a171bafb960ab93f0517baa3209a91FFB376/gamecrew)
-- [Frontend en Vercel](#) *(próximamente)*
-- [Backend en Render](#) *(próximamente)*
+- [Frontend en Vercel](https://gamecrew.vercel.app)
+- [Backend en Render](https://gamecrew-api.onrender.com)
 
 ##  Documentación
 
