@@ -2,19 +2,21 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import * as api from '../api/client'
 import type { Session } from '../types'
+import { useSessionContext } from '../context/SessionContext'
 import LoadingSpinner from '../components/LoadingSpinner'
 import ErrorMessage from '../components/ErrorMessage'
 import GameProposalForm from '../components/GameProposalForm'
 import RatingStars from '../components/RatingStars'
 import Button from '../components/Button'
+import toast from 'react-hot-toast'
 
 export default function SessionDetailPage() {
   const { id } = useParams()
+  const { updateSession } = useSessionContext()
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [rating, setRating] = useState(0)
-  const [ratingSuccess, setRatingSuccess] = useState(false)
   const [votedGameId, setVotedGameId] = useState<string | null>(null)
 
   useEffect(() => {
@@ -38,6 +40,7 @@ export default function SessionDetailPage() {
       await api.addGame(session.id, gameName, proposedBy, image)
       const updated = await api.getSessionById(session.id)
       setSession(updated)
+      updateSession(updated)
     } catch {
       setError('Error al añadir el juego')
     }
@@ -48,6 +51,7 @@ export default function SessionDetailPage() {
     try {
       const updated = await api.voteForGame(session.id, gameId, participantName)
       setSession(updated)
+      updateSession(updated)
       setVotedGameId(gameId)
     } catch {
       setError('Error al votar')
@@ -59,7 +63,8 @@ export default function SessionDetailPage() {
     try {
       const updated = await api.rateSession(session.id, rating)
       setSession(updated)
-      setRatingSuccess(true)
+      updateSession(updated)
+      toast.success('¡Valoración guardada!')
     } catch {
       setError('Error al valorar la sesión')
     }
@@ -132,9 +137,6 @@ export default function SessionDetailPage() {
         <h2 className="text-xl font-bold text-white mb-3">Valorar sesión</h2>
         <div className="bg-gray-800 rounded-xl p-4 flex flex-col gap-3">
           <RatingStars value={rating} onChange={setRating} />
-          {ratingSuccess && (
-            <p className="text-green-400 text-sm">¡Valoración guardada!</p>
-          )}
           <Button label="Guardar valoración" onClick={handleRate} variant="primary" disabled={rating === 0} />
         </div>
       </div>

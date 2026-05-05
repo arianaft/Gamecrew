@@ -8,6 +8,7 @@ interface SessionContextType {
   error: string | null
   fetchSessions: () => Promise<void>
   addSession: (session: Omit<Session, 'id' | 'games' | 'isPlayed'>) => Promise<void>
+  updateSession: (updated: Session) => void
 }
 
 const SessionContext = createContext<SessionContextType | null>(null)
@@ -49,8 +50,12 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
+  const updateSession = useCallback((updated: Session) => {
+    setSessions(prev => prev.map(s => s.id === updated.id ? updated : s))
+  }, [])
+
   return (
-    <SessionContext.Provider value={{ sessions, loading, error, fetchSessions, addSession }}>
+    <SessionContext.Provider value={{ sessions, loading, error, fetchSessions, addSession, updateSession }}>
       {children}
     </SessionContext.Provider>
   )
